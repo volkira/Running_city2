@@ -25,7 +25,7 @@
         <activity android:name="a1.SPbRun2.Map"></activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyComUhEqr9BL4JjqJE05Lck4j1uABIU08Y">
+            android:value="AIzaSyDqr6r00lusrhDsDYP5uCzp4EbGLOR0F0g">
         </meta-data>
         <meta-data
             android:name="com.google.android.gms.version"
