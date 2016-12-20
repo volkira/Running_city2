@@ -1,18 +1,22 @@
 <resources>
     <string name="app_name">SPbRun</string>
 
-    <!-- Strings related to login -->
-    <string name="hello_message">Знай и люби свой город!</string>
-    <string name="login">Логин</string>
-    <string name="password">Пароль</string>
     <string name="authorize">Авторизация</string>
     <string name="login_btn">Войти</string>
-    <string name="password_hint">Введите пароль</string>
-    <string name="login_hint">Введите логин</string>
-    <string name="to_map_button">На карте</string>
-
-    <string name="location_updated_message">Location updated</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="password_hint">Пароль</string>
+    <string name="login_hint">Имя</string>
+    <string name="question">Вопрос:</string>
+    <string name="answer">Ответ:</string>
+    <string name="hint_question">Помощь:</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_menu_quest">Квест</string>
+    <string name="nav_menu_stats">Статистика</string>
+    <string name="nav_menu_options">Настройка</string>
+    <string name="nav_menu_payment">Оплата</string>
+    <string name="nav_menu_exit">Выход</string>
+    <string name="answerBtn">Ответить</string>
+    <string name="toolbar_map">Карта</string>
 
 
 </resources>

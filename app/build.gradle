@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 24
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "a1.myapplication"
-        minSdkVersion 16
-        targetSdkVersion 25
+        minSdkVersion 18
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -16,6 +16,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug{
+            debuggable true
+        }
     }
 }
 
@@ -24,8 +27,17 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.google.android.gms:play-services:9.4.0'
+    compile 'com.android.support:design:24.2.0'
+
+    //compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+    //compile 'com.fasterxml.jackson.core:jackson-databind:2.8.5'
 
     testCompile 'junit:junit:4.12'
+}
+repositories {
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
 }
