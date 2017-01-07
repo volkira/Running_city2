@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:orderInCategory="1" >
+        <item
+            android:id="@+id/nav_quest"
+            android:orderInCategory="2"
+            android:title="@string/nav_menu_quest"
+            />
+    </group>
+    <item
+        android:id="@+id/nav_stats"
+        android:orderInCategory="3"
+        android:title="@string/nav_menu_stats"
+        />
+    <item
+        android:id="@+id/nav_options"
+        android:orderInCategory="4"
+        android:title="@string/nav_menu_options"
+        />
+    <item
+        android:id="@+id/nav_payment"
+        android:orderInCategory="5"
+        android:title="@string/nav_menu_payment"
+        />
+    <item
+        android:id="@+id/nav_exit"
+        android:orderInCategory="6"
+        android:title="@string/nav_menu_exit"
+        />
+
+</menu>
