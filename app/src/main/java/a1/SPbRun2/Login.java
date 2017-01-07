@@ -24,12 +24,12 @@ public class Login extends AppCompatActivity {
         login = (Button) findViewById(R.id.button_login);
     }
 
-    public void onLogin(View view) {
+    public void Login(View view) {
 
         if (username.getText().toString().equals("admin") &&
                 password.getText().toString().equals("admin")) {
             Toast.makeText(getApplicationContext(), "Вход выполнен!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Login.this, Question.class);
+            Intent intent = new Intent(this, Question.class);
             startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), "Неправильно указан логин или пароль. Проверьте данные!", Toast.LENGTH_SHORT).show();

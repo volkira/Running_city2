@@ -31,8 +31,6 @@ public class Question extends AppCompatActivity  implements NavigationView.OnNav
         setContentView(R.layout.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
         toMapBtn = (Button) findViewById(R.id.toMap);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -51,8 +49,6 @@ public class Question extends AppCompatActivity  implements NavigationView.OnNav
         };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
