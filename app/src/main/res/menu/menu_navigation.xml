@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:orderInCategory="1" >
-        <item
-            android:id="@+id/nav_quest"
-            android:orderInCategory="2"
-            android:title="@string/nav_menu_quest"
-            />
-    </group>
+<group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_point"
+        android:orderInCategory="3"
+        android:title="@string/nav_menu_point"
+        android:icon="@mipmap/ic_pin"
+        />
     <item
         android:id="@+id/nav_stats"
         android:orderInCategory="3"
         android:title="@string/nav_menu_stats"
+        android:icon="@mipmap/ic_run"
         />
     <item
-        android:id="@+id/nav_options"
+        android:id="@+id/nav_settings"
         android:orderInCategory="4"
         android:title="@string/nav_menu_options"
+        android:icon="@mipmap/ic_settings"
         />
     <item
         android:id="@+id/nav_payment"
         android:orderInCategory="5"
         android:title="@string/nav_menu_payment"
+        android:icon="@mipmap/ic_wallet"
         />
     <item
         android:id="@+id/nav_exit"
         android:orderInCategory="6"
         android:title="@string/nav_menu_exit"
-        />
+        android:icon="@mipmap/ic_exit_to_app"
+        android:enabled="true"
+        android:showAsAction="collapseActionView">
+    </item>
 
+</group>
 </menu>

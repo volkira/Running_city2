@@ -14,13 +14,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="a1.SPbRun2.Login">
+        <activity android:name="a1.SPbRun2.MainLogin">
+
+        </activity>
+        <activity android:name="a1.SPbRun2.Question">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name="a1.SPbRun2.Question">
         </activity>
         <activity android:name="a1.SPbRun2.Map"></activity>
         <meta-data

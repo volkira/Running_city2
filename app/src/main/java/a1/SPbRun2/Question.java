@@ -1,29 +1,35 @@
 package a1.SPbRun2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.Toast;
+import android.view.View;
 
-import com.google.android.gms.common.api.GoogleApiClient;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import a1.SPbRun2.dto.QuestionDTO;
+import a1.SPbRun2.fragment.PaymentFragment;
+import a1.SPbRun2.fragment.PointFragment;
+import a1.SPbRun2.fragment.StatisticsFragment;
+
+
 
 public class Question extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
-
-    private GoogleApiClient client;
-    private DrawerLayout drawer;
-    private NavigationView navigationView ;
-    private ActionBarDrawerToggle toggle;
-    private Button toMapBtn;
+    private Intent intent;
+    private Fragment fragment;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +37,10 @@ public class Question extends AppCompatActivity  implements NavigationView.OnNav
         setContentView(R.layout.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toMapBtn = (Button) findViewById(R.id.toMap);
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
             /** Called when a drawer has settled in a completely closed state. */
@@ -50,9 +56,14 @@ public class Question extends AppCompatActivity  implements NavigationView.OnNav
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        fragment = PointFragment.newInstance(context);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
     }
+
 
 
     @Override
@@ -65,69 +76,81 @@ public class Question extends AppCompatActivity  implements NavigationView.OnNav
         }
     }
 
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-        boolean drawerOpen = drawer.isDrawerOpen(navigationView);
-        menu.findItem(R.id.toolbar_map).setVisible(!drawerOpen);
-        return super.onPrepareOptionsMenu(menu);
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        if (toggle.onOptionsItemSelected(item)) {
-            return true;
-        }
         int id = item.getItemId();
 
-        switch (id){
-            case R.id.toolbar_map:
-                Toast.makeText(getApplicationContext(), "Вход выполнен!", Toast.LENGTH_SHORT).show();
-                return true;
+        if (id == R.id.toolbar_map) {
+            intent = new Intent (this.getApplicationContext(), Map.class);
+            startActivity(intent);
         }
+
         return super.onOptionsItemSelected(item);
-
-
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        switch (id){
-            case R.id.nav_quest:
-                return true;
+        Class fragmentClass;
+        switch(item.getItemId()) {
+            case R.id.nav_point:
+                fragmentClass = PointFragment.class;
+                break;
             case R.id.nav_stats:
-                return true;
-            case R.id.nav_options:
-                return true;
+                fragmentClass = StatisticsFragment.class;
+                break;
+            case R.id.nav_settings:
+                fragmentClass = PointFragment.class;
+                break;
             case R.id.nav_payment:
-                return true;
+                fragmentClass = PaymentFragment.class;
+                break;
             case R.id.nav_exit:
-                return true;
+                fragmentClass = PointFragment.class;
+                break;
+            default:
+                fragmentClass = PointFragment.class;
         }
 
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+        item.setChecked(true);
+        setTitle(item.getTitle());
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    public void toMap(View view){
-        Intent intent = new Intent(Question.this, Map.class);
-        startActivity(intent);
-    }
+    private class RemindMeTask extends AsyncTask<Void, Void, QuestionDTO> {
 
+        @Override
+        protected QuestionDTO doInBackground(Void... params) {
+            RestTemplate template = new RestTemplate();
+            template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+            return template.getForObject(Constants.URL.GET_QUESTION, QuestionDTO.class);
+        }
+    }
 
 }
