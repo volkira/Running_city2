@@ -10,6 +10,13 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        packagingOptions {
+            exclude 'META-INF/ASL2.0'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/license.txt'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/notice.txt'
+        }
     }
     buildTypes {
         release {
@@ -31,7 +38,7 @@ dependencies {
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.8.5'
     compile 'com.android.support:recyclerview-v7:25.1.0'
-
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.11'
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.google.android.gms:play-services:10.0.1'
     compile 'com.android.support:design:25.1.0'

@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:text="@string/login_btn"
             style="@style/ButtonStyle"
-            android:onClick="Login" />
+            />
 
         <Button
             android:text="@string/Register"

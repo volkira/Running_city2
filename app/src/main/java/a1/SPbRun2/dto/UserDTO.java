@@ -13,7 +13,6 @@ public class UserDTO {
     private String language;
     private Date birthDate;
 
-
     public String getPassword() {
         return password;
     }

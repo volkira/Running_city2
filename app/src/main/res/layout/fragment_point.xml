@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -9,10 +9,104 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="a1.SPbRun2.fragment.PointFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycleView" />
+        android:layout_height="wrap_content"
+        android:id="@+id/pointLabel"
+        android:textSize="18sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/question"
+        android:textColor="@color/textStandard" />
 
 
-</RelativeLayout>
+    <TextView
+            style="@style/FullLineText"
+            android:layout_width="match_parent"
+            android:ems="10"
+            android:id="@+id/point"
+            android:layout_below="@+id/pointLabel"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:inputType="none" />
+
+
+    <TextView
+        android:text="@string/answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/answerLabel"
+        android:textSize="18sp"
+
+        android:textColor="@color/textStandard"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="13dp" />
+
+    <TextView style="@style/FullLineText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:id="@+id/answer"
+        android:layout_below="@+id/answerLabel"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="@string/hint_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/HintLabel"
+        android:textSize="18sp"
+        android:layout_below="@+id/answer"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/textStandard" />
+
+
+    <TextView style="@style/FullLineText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Hint1"
+        android:enabled="false"
+        android:inputType="none"
+        android:layout_below="@+id/HintLabel"
+        android:layout_alignParentStart="true"
+        android:background="@color/backgroundTransparent" />
+
+    <TextView style="@style/FullLineText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:id="@+id/Hint3"
+        android:enabled="false"
+        android:layout_below="@+id/Hint2"
+        android:layout_alignParentEnd="true"
+        android:background="@color/backgroundTransparent" />
+
+
+
+    <TextView style="@style/FullLineText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:id="@+id/Hint2"
+        android:enabled="false"
+        android:layout_below="@+id/Hint1"
+        android:layout_alignParentStart="true"
+        android:background="@color/backgroundTransparent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sendBtn"
+        android:layout_gravity="center"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:text="@string/answerBtn"
+        android:foregroundGravity="center_horizontal"
+        android:visibility="visible"
+        android:textSize="14sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/Hint3"
+        android:layout_centerHorizontal="true" />
+
+
+</LinearLayout>

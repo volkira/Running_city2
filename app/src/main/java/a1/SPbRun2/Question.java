@@ -10,11 +10,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -26,7 +27,7 @@ import a1.SPbRun2.fragment.StatisticsFragment;
 
 
 
-public class Question extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
+public class Question extends AbstractAsyncActivity  implements NavigationView.OnNavigationItemSelectedListener{
     private Intent intent;
     private Fragment fragment;
     private Context context;
@@ -59,9 +60,7 @@ public class Question extends AppCompatActivity  implements NavigationView.OnNav
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        fragment = PointFragment.newInstance(context);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+        
     }
 
 
@@ -108,6 +107,7 @@ public class Question extends AppCompatActivity  implements NavigationView.OnNav
         switch(item.getItemId()) {
             case R.id.nav_point:
                 fragmentClass = PointFragment.class;
+                new QuestionRequestTask().execute();
                 break;
             case R.id.nav_stats:
                 fragmentClass = StatisticsFragment.class;
@@ -142,15 +142,29 @@ public class Question extends AppCompatActivity  implements NavigationView.OnNav
         return true;
     }
 
-    private class RemindMeTask extends AsyncTask<Void, Void, QuestionDTO> {
 
+    private class QuestionRequestTask extends AsyncTask<Void, Void, QuestionDTO> {
         @Override
         protected QuestionDTO doInBackground(Void... params) {
-            RestTemplate template = new RestTemplate();
-            template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            try {
 
-            return template.getForObject(Constants.URL.GET_QUESTION, QuestionDTO.class);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                QuestionDTO point = restTemplate.getForObject(Constants.URL.GET_QUESTION, QuestionDTO.class);
+                return point;
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e);
+            }
+
+            return null;
         }
+
+        @Override
+        protected void onPostExecute(QuestionDTO greeting) {
+            TextView questionText = (TextView) findViewById(R.id.point);
+            questionText.setText(greeting.getQuestionText());
+        }
+
     }
 
 }
