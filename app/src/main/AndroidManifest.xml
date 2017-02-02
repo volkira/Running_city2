@@ -26,7 +26,12 @@
         <activity android:name="a1.SPbRun2.Register">
 
         </activity>
-        <activity android:name="a1.SPbRun2.Map"></activity>
+        <activity android:name="a1.SPbRun2.Map">
+
+        </activity>
+        <activity android:name="a1.SPbRun2.QuestChoice">
+
+        </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDqr6r00lusrhDsDYP5uCzp4EbGLOR0F0g">

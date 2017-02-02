@@ -45,7 +45,7 @@ public abstract class AbstractAsyncActivity extends AppCompatActivity {
     // Public methods
     // ***************************************
     public void showLoadingProgressDialog() {
-        this.showProgressDialog("Загрузка...");
+        this.showProgressDialog(getString(R.string.loading));
     }
 
     public void showProgressDialog(CharSequence message) {

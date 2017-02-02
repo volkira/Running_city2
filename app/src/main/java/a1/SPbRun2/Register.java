@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import a1.SPbRun2.dto.UserDTO;
+import a1.SPbRun2.util.Constants;
 
 /**
  * Created by FreeWind on 19.01.2017.
@@ -81,7 +82,7 @@ public class Register extends AbstractAsyncActivity {
             // display a notification to the user with the response message
             Toast.makeText(this, result, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "I got null, something happened!", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Произошла ошибка. Попробуйте снова", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -128,8 +129,6 @@ public class Register extends AbstractAsyncActivity {
 
             // The URL for making the POST request
        HttpHeaders requestHeaders = new HttpHeaders();
-
-                // Sending a JSON or XML object i.e. "application/json" or "application/xml"
             requestHeaders.setContentType(mediaType);
 
                 // Populate the Message object to serialize and headers in an

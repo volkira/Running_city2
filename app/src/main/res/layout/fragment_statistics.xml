@@ -5,44 +5,95 @@
     android:layout_height="match_parent"
     tools:context="a1.SPbRun2.fragment.StatisticsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/nav_menu_stats"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:id="@+id/textView" />
-
-    <TextView
-        android:text="TextView"
+        android:text="Прошли:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
+        android:id="@+id/distanceLabel"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:id="@+id/distanceLabel" />
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp" />
 
     <TextView
-        android:text="TextView"
+        android:text="Потратили времени:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/timeLabel"
         android:layout_below="@+id/distanceLabel"
-        android:layout_alignEnd="@+id/distanceLabel"
-        android:layout_marginTop="12dp"
-        android:id="@+id/textView3" />
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="TextView"
+        android:text="Использовали подсказок:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/timeLabel"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp"
-        android:id="@+id/textView5" />
+        android:id="@+id/hintLabellStats" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        android:layout_alignParentEnd="true"
+        android:id="@+id/distanceQuest" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/timeLabel"
+        android:layout_alignStart="@+id/distanceQuest"
+        android:id="@+id/timeStats" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentEnd="true"
+        android:id="@+id/distanceStats" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/hintLabellStats"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/hintStats" />
+
+    <RelativeLayout
+        android:id="@+id/rl_progress_bar_set"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_alignBottom="@+id/progressLabel"
+        android:layout_toEndOf="@+id/hintLabellStats">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/questProgress"
+            android:layout_alignParentEnd="true"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="20"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_progress_horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/questProgress"
+            android:background="@android:color/transparent"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <TextView
+        android:text="Прогресс:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressLabel"
+        android:layout_below="@+id/hintLabellStats"
+        android:layout_alignParentStart="true" />
+
 
 </RelativeLayout>

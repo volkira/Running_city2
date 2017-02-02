@@ -1,12 +1,25 @@
 package a1.SPbRun2.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by Misha on 17.11.2016.
  */
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class QuestDTO {
+
     private int id;
     private String name;
     private String description;
+    private int numberOfQuestions;
+
+    public int getNumberOfQuestions() {
+        return numberOfQuestions;
+    }
+
+    public void setNumberOfQuestions(int numberOfQuestions) {
+        this.numberOfQuestions = numberOfQuestions;
+    }
 
     public int getId() {
         return id;

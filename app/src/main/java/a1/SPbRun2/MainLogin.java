@@ -24,16 +24,18 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 
 import a1.SPbRun2.dto.UserDTO;
+import a1.SPbRun2.util.Constants;
 
 
 public class MainLogin extends AbstractAsyncActivity  {
 
+    private String username;
+    private String password;
+    String header;
 
     protected static final String TAG = MainLogin.class.getSimpleName();
 
-    // ***************************************
-    // Activity methods
-    // ***************************************
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,14 +57,12 @@ public class MainLogin extends AbstractAsyncActivity  {
         });
     }
 
-    // ***************************************
-    // Private methods
-    // ***************************************
 
     private void displayResponse(UserDTO response) {
         if (response.getEmail() != null){
             Toast.makeText(this, getApplicationContext().getString(R.string.welcome_message)+ " " + response.getName() + "!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this.getApplicationContext(), Question.class);
+            Intent intent = new Intent(this.getApplicationContext(), QuestChoice.class);
+            intent.putExtra("header", header);
             startActivity(intent);}
         else{
             Toast.makeText(this, getApplicationContext().getString(R.string.auth_failure), Toast.LENGTH_LONG).show();}
@@ -73,8 +73,6 @@ public class MainLogin extends AbstractAsyncActivity  {
     // ***************************************
     private class FetchSecuredResourceTask extends AsyncTask<Void, Void, UserDTO> {
 
-        private String username;
-        private String password;
 
         @Override
         protected void onPreExecute() {
@@ -82,10 +80,10 @@ public class MainLogin extends AbstractAsyncActivity  {
 
             // build the message object
             EditText editText = (EditText) findViewById(R.id.edit_user);
-            this.username = editText.getText().toString();
+            username = editText.getText().toString();
 
             editText = (EditText) findViewById(R.id.edit_password);
-            this.password = editText.getText().toString();
+            password = editText.getText().toString();
         }
 
         @Override
@@ -96,6 +94,7 @@ public class MainLogin extends AbstractAsyncActivity  {
             HttpAuthentication authHeader = new HttpBasicAuthentication(username, password);
             HttpHeaders requestHeaders = new HttpHeaders();
             requestHeaders.setAuthorization(authHeader);
+            header = requestHeaders.getAuthorization();
             requestHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
             // Create a new RestTemplate instance

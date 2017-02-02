@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SPbRun</string>
+    <string name="app_name">CityQuest</string>
 
     <string name="authorize">Авторизация</string>
     <string name="login_btn">Войти</string>
@@ -25,6 +25,7 @@
     <string name="confirm_password">Повторите пароль</string>
     <string name="birthdate">Дата рождения</string>
     <string name="email">Email</string>
+    <string name="loading">Загрузка...</string>
     <string-array name="languages_array">
         <item>Русский</item>
         <item>English</item>

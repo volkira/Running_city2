@@ -2,7 +2,6 @@ package a1.SPbRun2;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,16 +10,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
-
-import a1.SPbRun2.dto.QuestionDTO;
 import a1.SPbRun2.fragment.PaymentFragment;
 import a1.SPbRun2.fragment.PointFragment;
 import a1.SPbRun2.fragment.StatisticsFragment;
@@ -31,6 +24,7 @@ public class Question extends AbstractAsyncActivity  implements NavigationView.O
     private Intent intent;
     private Fragment fragment;
     private Context context;
+    private String header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +54,9 @@ public class Question extends AbstractAsyncActivity  implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        
+
+        Intent intent2 = getIntent();
+        header = intent2.getStringExtra("header");
     }
 
 
@@ -107,7 +103,7 @@ public class Question extends AbstractAsyncActivity  implements NavigationView.O
         switch(item.getItemId()) {
             case R.id.nav_point:
                 fragmentClass = PointFragment.class;
-                new QuestionRequestTask().execute();
+                //new QuestionRequestTask().execute();
                 break;
             case R.id.nav_stats:
                 fragmentClass = StatisticsFragment.class;
@@ -127,6 +123,9 @@ public class Question extends AbstractAsyncActivity  implements NavigationView.O
 
         try {
             fragment = (Fragment) fragmentClass.newInstance();
+            Bundle bundle = new Bundle();
+            bundle.putString("header", header);
+            fragment.setArguments(bundle);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -142,29 +141,5 @@ public class Question extends AbstractAsyncActivity  implements NavigationView.O
         return true;
     }
 
-
-    private class QuestionRequestTask extends AsyncTask<Void, Void, QuestionDTO> {
-        @Override
-        protected QuestionDTO doInBackground(Void... params) {
-            try {
-
-                RestTemplate restTemplate = new RestTemplate();
-                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                QuestionDTO point = restTemplate.getForObject(Constants.URL.GET_QUESTION, QuestionDTO.class);
-                return point;
-            } catch (Exception e) {
-                Log.e("MainActivity", e.getMessage(), e);
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(QuestionDTO greeting) {
-            TextView questionText = (TextView) findViewById(R.id.point);
-            questionText.setText(greeting.getQuestionText());
-        }
-
-    }
 
 }
