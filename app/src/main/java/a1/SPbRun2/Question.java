@@ -1,6 +1,8 @@
 package a1.SPbRun2;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,15 +19,17 @@ import android.view.View;
 
 import a1.SPbRun2.fragment.PaymentFragment;
 import a1.SPbRun2.fragment.PointFragment;
+import a1.SPbRun2.fragment.SettingsFragment;
 import a1.SPbRun2.fragment.StatisticsFragment;
-
 
 
 public class Question extends AbstractAsyncActivity  implements NavigationView.OnNavigationItemSelectedListener{
     private Intent intent;
     private Fragment fragment;
     private Context context;
-    private String header;
+    private String questId;
+    private String questNumberOfQuestions;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +38,25 @@ public class Question extends AbstractAsyncActivity  implements NavigationView.O
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+//        SecurePreferences preferences = new SecurePreferences(this, "my-preferences", "998811223377446655", true);
+//        questId = preferences.getString("questId");
+//        questNumberOfQuestions = preferences.getString("questNumberOfQuestions");
+//        Toast.makeText(this,questId,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,questNumberOfQuestions,Toast.LENGTH_SHORT).show();
+
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
 
-            /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
-                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                supportInvalidateOptionsMenu();
             }
 
-            /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View navigationView) {
-                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                supportInvalidateOptionsMenu();
             }
         };
         drawer.addDrawerListener(toggle);
@@ -54,9 +65,6 @@ public class Question extends AbstractAsyncActivity  implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        Intent intent2 = getIntent();
-        header = intent2.getStringExtra("header");
     }
 
 
@@ -81,9 +89,7 @@ public class Question extends AbstractAsyncActivity  implements NavigationView.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         if (id == R.id.toolbar_map) {
@@ -98,36 +104,44 @@ public class Question extends AbstractAsyncActivity  implements NavigationView.O
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        Class fragmentClass;
+
+
         switch(item.getItemId()) {
             case R.id.nav_point:
-                fragmentClass = PointFragment.class;
-                //new QuestionRequestTask().execute();
+                fragment = new PointFragment();
+                fragment.setRetainInstance(true);
                 break;
             case R.id.nav_stats:
-                fragmentClass = StatisticsFragment.class;
+                fragment = new StatisticsFragment();
                 break;
             case R.id.nav_settings:
-                fragmentClass = PointFragment.class;
+                fragment = new SettingsFragment();
                 break;
             case R.id.nav_payment:
-                fragmentClass = PaymentFragment.class;
+                fragment = new PaymentFragment();
                 break;
             case R.id.nav_exit:
-                fragmentClass = PointFragment.class;
+                fragment = new PointFragment();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.exit_text);
+
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(getApplicationContext(), Activity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 break;
             default:
-                fragmentClass = PointFragment.class;
-        }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-            Bundle bundle = new Bundle();
-            bundle.putString("header", header);
-            fragment.setArguments(bundle);
-        } catch (Exception e) {
-            e.printStackTrace();
+                fragment = new PointFragment();
         }
 
         // Insert the fragment by replacing any existing fragment

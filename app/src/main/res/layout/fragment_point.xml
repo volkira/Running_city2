@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -7,7 +8,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="a1.SPbRun2.fragment.PointFragment">
+    tools:context="a1.SPbRun2.fragment.PointFragment"
+
+    android:background="@color/colorPrimary"
+    app:layout_scrollFlags="scroll">
 
     <TextView
         android:layout_width="match_parent"
@@ -17,18 +21,27 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="@string/question"
-        android:textColor="@color/textStandard" />
+        android:textColor="@color/textElementLight" />
 
 
-    <TextView
-            style="@style/FullLineText"
-            android:layout_width="match_parent"
-            android:ems="10"
-            android:id="@+id/point"
-            android:layout_below="@+id/pointLabel"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:inputType="none" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+                style="@style/FullLineText"
+                android:layout_width="match_parent"
+                android:id="@+id/point"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:inputType="none"
+            android:background="@color/backgroundTransparent"
+            android:textAlignment="viewStart"
+            android:minHeight="0dp" />
+    </LinearLayout>
 
 
     <TextView
@@ -38,18 +51,38 @@
         android:id="@+id/answerLabel"
         android:textSize="18sp"
 
-        android:textColor="@color/textStandard"
+        android:textColor="@color/textElementLight"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentStart="true"
         android:layout_marginTop="13dp" />
 
-    <TextView style="@style/FullLineText"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:id="@+id/answer"
-        android:layout_below="@+id/answerLabel"
-        android:layout_alignParentEnd="true" />
+        android:padding="8dp"
+        android:background="@color/colorPrimary"
+        android:weightSum="1">
+
+        <EditText style="@style/FullLineText"
+            android:layout_width="278dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:id="@+id/answer"
+            android:layout_below="@+id/answerLabel"
+            android:layout_alignParentEnd="true"
+            android:background="@color/backgroundLight"
+            android:layout_weight="0.98" />
+
+        <ImageButton
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/reply"
+            android:id="@+id/answerButton"
+            android:background="@color/backgroundLight"
+            android:visibility="visible"
+            android:layout_width="30dp" />
+
+    </LinearLayout>
 
     <TextView
         android:text="@string/hint_question"
@@ -59,54 +92,92 @@
         android:textSize="18sp"
         android:layout_below="@+id/answer"
         android:layout_alignParentStart="true"
-        android:textColor="@color/textStandard" />
+        android:textColor="@color/textElementLight"  />
 
 
-    <TextView style="@style/FullLineText"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Hint1"
-        android:enabled="false"
-        android:inputType="none"
-        android:layout_below="@+id/HintLabel"
-        android:layout_alignParentStart="true"
-        android:background="@color/backgroundTransparent" />
+        android:padding="8dp"
+        android:background="@color/colorPrimary"
+        android:weightSum="1">
 
-    <TextView style="@style/FullLineText"
+        <TextView style="@style/FullLineText"
+            android:layout_height="wrap_content"
+            android:id="@+id/Hint1"
+            android:enabled="false"
+            android:inputType="none"
+            android:background="@color/backgroundTransparent"
+            android:clickable="true"
+            android:layout_weight="0.58"
+            android:layout_width="278dp" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/book_open_page_variant"
+            android:id="@+id/hint1Btn"
+            android:background="@color/backgroundTransparent"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="none"
-        android:id="@+id/Hint3"
-        android:enabled="false"
-        android:layout_below="@+id/Hint2"
-        android:layout_alignParentEnd="true"
-        android:background="@color/backgroundTransparent" />
+        android:padding="8dp"
+        android:background="@color/colorPrimary"
+        android:weightSum="1">
 
+        <TextView style="@style/FullLineText"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            android:id="@+id/Hint2"
+            android:enabled="false"
+            android:background="@color/backgroundTransparent"
+            android:clickable="true"
+            android:layout_weight="0.32"
+            android:layout_width="278dp" />
 
+        <ImageButton
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/book_open_page_variant"
+            android:id="@+id/hint2Btn"
+            android:background="@color/backgroundTransparent"
+            android:layout_width="30dp"
+            android:visibility="visible" />
+    </LinearLayout>
 
-    <TextView style="@style/FullLineText"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="none"
-        android:id="@+id/Hint2"
-        android:enabled="false"
-        android:layout_below="@+id/Hint1"
-        android:layout_alignParentStart="true"
-        android:background="@color/backgroundTransparent" />
+        android:padding="8dp"
+        android:background="@color/colorPrimary"
+        android:weightSum="1">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sendBtn"
-        android:layout_gravity="center"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:text="@string/answerBtn"
-        android:foregroundGravity="center_horizontal"
-        android:visibility="visible"
-        android:textSize="14sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_below="@+id/Hint3"
-        android:layout_centerHorizontal="true" />
+        <TextView style="@style/FullLineText"
+
+            android:layout_height="match_parent"
+            android:inputType="none"
+            android:id="@+id/Hint3"
+            android:enabled="false"
+            android:background="@color/backgroundTransparent"
+            android:clickable="true"
+            android:layout_weight="0.08"
+            android:layout_width="278dp" />
+
+        <ImageButton
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/book_open_page_variant"
+            android:id="@+id/hint3Btn"
+            android:background="@color/backgroundTransparent"
+            android:visibility="visible"
+            android:layout_width="30dp" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

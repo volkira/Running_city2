@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/cardView"
         card:cardElevation="2dp"
-        card:cardBackgroundColor="@color/backgroundLight"
+        card:cardBackgroundColor="@color/backgroundTransparent"
         card:cardPreventCornerOverlap="false">
         <RelativeLayout
             android:layout_width="match_parent"

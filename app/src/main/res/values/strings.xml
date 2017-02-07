@@ -25,6 +25,11 @@
     <string name="confirm_password">Повторите пароль</string>
     <string name="birthdate">Дата рождения</string>
     <string name="email">Email</string>
+
+    <string name="yes">Да, выйти</string>
+    <string name="cancel">Отмена</string>
+    <string name="exit_text">Вы уверены, что хотите выйти?</string>
+
     <string name="loading">Загрузка...</string>
     <string-array name="languages_array">
         <item>Русский</item>

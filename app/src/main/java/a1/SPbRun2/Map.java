@@ -139,8 +139,6 @@ public class Map extends AppCompatActivity implements
         }
         latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-
-
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
     }
 

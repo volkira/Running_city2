@@ -22,6 +22,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import a1.SPbRun2.dto.UserDTO;
 import a1.SPbRun2.util.Constants;
@@ -49,7 +50,7 @@ public class Register extends AbstractAsyncActivity {
         confPassword = (EditText) findViewById(R.id.edit_password_confirm);
         EditText userBirthdate = (EditText) findViewById(R.id.edit_birthdate);
         String dateString = userBirthdate.getText().toString();
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
         try {
             birthdate = format.parse(dateString);
         } catch (ParseException e) {
@@ -128,7 +129,7 @@ public class Register extends AbstractAsyncActivity {
             MediaType mediaType = MediaType.APPLICATION_JSON;
 
             // The URL for making the POST request
-       HttpHeaders requestHeaders = new HttpHeaders();
+            HttpHeaders requestHeaders = new HttpHeaders();
             requestHeaders.setContentType(mediaType);
 
                 // Populate the Message object to serialize and headers in an

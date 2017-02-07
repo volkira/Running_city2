@@ -1,5 +1,7 @@
 package a1.SPbRun2.adapter;
 
+
+import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,9 +14,13 @@ import java.util.List;
 import a1.SPbRun2.R;
 import a1.SPbRun2.dto.QuestDTO;
 
-public class QuestListAdapter extends RecyclerView.Adapter<QuestListAdapter.QuestViewHolder>{
+
+
+
+public class QuestListAdapter extends RecyclerView.Adapter<QuestListAdapter.QuestViewHolder> {
 
     private List<QuestDTO> questList;
+    Context context;
 
     public QuestListAdapter(List<QuestDTO> questList) {
         this.questList = questList;
@@ -37,6 +43,8 @@ public class QuestListAdapter extends RecyclerView.Adapter<QuestListAdapter.Ques
         QuestDTO item = questList.get(position);
         questViewHolder.questName.setText(item.getName());
         questViewHolder.questDescription.setText(item.getDescription());
+        questViewHolder.questId = item.getId();
+        questViewHolder.questNumberOfQuestions = item.getNumberOfQuestions();
     }
 
     @Override
@@ -47,19 +55,31 @@ public class QuestListAdapter extends RecyclerView.Adapter<QuestListAdapter.Ques
     public void setData(List<QuestDTO> questList) {
         this.questList = questList;
     }
+    public int getQuestId(int position) {
+        return questList.get(position).getId();
+    }
+    public int getNumberOfQuestions(int position) {
+        return questList.get(position).getNumberOfQuestions();
+    }
+
 
     public static class QuestViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         TextView questName;
         TextView questDescription;
+        int questId;
+        int questNumberOfQuestions;
 //        ImageView questPicture;
 
         QuestViewHolder(View itemView) {
             super(itemView);
-            cardView = (CardView)itemView.findViewById(R.id.cardView);
-            questName = (TextView)itemView.findViewById(R.id.quest_name);
-            questDescription = (TextView)itemView.findViewById(R.id.quest_description);
+            cardView = (CardView) itemView.findViewById(R.id.cardView);
+            questName = (TextView) itemView.findViewById(R.id.quest_name);
+            questDescription = (TextView) itemView.findViewById(R.id.quest_description);
 //            questPicture = (ImageView)itemView.findViewById(R.id.quest_picture);
         }
+
+
     }
+
 }

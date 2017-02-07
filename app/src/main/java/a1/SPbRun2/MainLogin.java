@@ -25,13 +25,14 @@ import java.util.Collections;
 
 import a1.SPbRun2.dto.UserDTO;
 import a1.SPbRun2.util.Constants;
+import a1.SPbRun2.util.SecurePreferences;
 
 
 public class MainLogin extends AbstractAsyncActivity  {
 
     private String username;
     private String password;
-    String header;
+    private String header;
 
     protected static final String TAG = MainLogin.class.getSimpleName();
 
@@ -61,12 +62,15 @@ public class MainLogin extends AbstractAsyncActivity  {
     private void displayResponse(UserDTO response) {
         if (response.getEmail() != null){
             Toast.makeText(this, getApplicationContext().getString(R.string.welcome_message)+ " " + response.getName() + "!", Toast.LENGTH_LONG).show();
+            SecurePreferences preferences = new SecurePreferences(this, "my-preferences", "998811223377446655", true);
+            preferences.put("header", header);
             Intent intent = new Intent(this.getApplicationContext(), QuestChoice.class);
-            intent.putExtra("header", header);
             startActivity(intent);}
         else{
             Toast.makeText(this, getApplicationContext().getString(R.string.auth_failure), Toast.LENGTH_LONG).show();}
     }
+
+
 
     // ***************************************
     // Private classes

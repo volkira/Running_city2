@@ -14,7 +14,6 @@ import java.io.IOException;
 public class HeaderRequestInterceptor implements ClientHttpRequestInterceptor {
 
     private final String headerName;
-
     private final String headerValue;
 
     public HeaderRequestInterceptor(String headerName, String headerValue) {
